@@ -1,7 +1,9 @@
 package com.xmcyodc.recommendationservice.model;
 
-import lombok.Data;
-
-@Data
-public class Cryptocurrency {
+public enum Cryptocurrency {
+    BTC,
+    DOGE,
+    ETH,
+    LTC,
+    XRP
 }
