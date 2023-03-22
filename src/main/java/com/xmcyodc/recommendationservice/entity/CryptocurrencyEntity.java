@@ -1,13 +1,8 @@
 package com.xmcyodc.recommendationservice.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -16,6 +11,15 @@ import java.time.Instant;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Table
+@NoArgsConstructor
+@AllArgsConstructor
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "get_normalized_crypto",
+                query = "select round(((max(c.price)-min(c.price))/min(c.price)),2) as price, " +
+                        "symbol from cryptocurrency c group by symbol order by price desc;"
+        )
+})
 public class CryptocurrencyEntity {
 
     @Id
