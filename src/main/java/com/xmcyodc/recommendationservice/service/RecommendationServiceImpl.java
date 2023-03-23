@@ -1,5 +1,7 @@
 package com.xmcyodc.recommendationservice.service;
 
+import com.xmcyodc.recommendationservice.exception.CryptoNotFoundException;
+import com.xmcyodc.recommendationservice.exception.WrongEvaluatedDateException;
 import com.xmcyodc.recommendationservice.model.Cryptocurrency;
 import com.xmcyodc.recommendationservice.model.CryptocurrencyItem;
 import com.xmcyodc.recommendationservice.model.ParticularCryptocurrency;
@@ -48,9 +50,9 @@ public class RecommendationServiceImpl implements RecommendationService {
                             .symbol(Cryptocurrency.valueOf(tuple.get(4, String.class)))
                             .build()
                     )
-                    .orElseThrow(RuntimeException::new);//TODO: correct
+                    .orElseThrow(IllegalStateException::new);
         }
-        else throw new IllegalStateException("lalalaalalalalal");//todo: correct
+        else throw new CryptoNotFoundException();
     }
 
     @Override
@@ -61,6 +63,6 @@ public class RecommendationServiceImpl implements RecommendationService {
         return maybeTuple.map(tuple -> CryptocurrencyItem.builder()
                         .symbol(Cryptocurrency.valueOf(tuple.get(1, String.class)))
                         .build())
-                .orElseThrow(() ->{throw new IllegalStateException("bobobobobooobob");});//TODO: correct
+                .orElseThrow(() ->{throw new WrongEvaluatedDateException();});
     }
 }
