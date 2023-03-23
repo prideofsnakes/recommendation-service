@@ -1,7 +1,7 @@
 package com.xmcyodc.recommendationservice.facade;
 
-import com.xmcyodc.recommendationservice.model.Cryptocurrency;
 import com.xmcyodc.recommendationservice.model.CryptocurrencyItem;
+import com.xmcyodc.recommendationservice.model.ParticularCryptocurrency;
 import com.xmcyodc.recommendationservice.service.RecommendationService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +19,12 @@ public class RecommendationController {
     private final RecommendationService service;
 
     @GetMapping()
-    public List<CryptocurrencyItem> getAllCryptocurrencies(){
-        return service.getAllCryptocurrencies();
+    public List<CryptocurrencyItem> getNormalizedRangeCryptocurrencies(){
+        return service.getAllNormalizedRangeCryptocurrencies();
     }
 
     @GetMapping("/{crypto}")
-    public CryptocurrencyItem getParticularCryptocurrency(@PathVariable Cryptocurrency crypto){
-        return service.getParticularCryptocurrency();
+    public ParticularCryptocurrency getParticularCryptocurrency(@PathVariable String crypto){
+        return service.getParticularCryptocurrency(crypto);
     }
 }

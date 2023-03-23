@@ -18,6 +18,16 @@ import java.time.Instant;
                 name = "get_normalized_crypto",
                 query = "select round(((max(c.price)-min(c.price))/min(c.price)),2) as price, " +
                         "symbol from cryptocurrency c group by symbol order by price desc;"
+        ),
+        @NamedNativeQuery(
+                name = "get_oldest_newest_max_min_crypto",
+                query = "select max(c.price) as max, " +
+                        "min(c.price) as min, " +
+                        "max(c.evaluated_at) as newest, " +
+                        "min(c.evaluated_at) as oldest, " +
+                        "symbol from cryptocurrency c " +
+                        "where c.symbol = (:cryptoName)" +
+                        "group by symbol"
         )
 })
 public class CryptocurrencyEntity {
