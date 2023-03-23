@@ -28,7 +28,13 @@ import java.time.Instant;
                         "symbol from cryptocurrency c " +
                         "where c.symbol = (:cryptoName)" +
                         "group by symbol"
-        )
+        ),
+        @NamedNativeQuery(
+                name = "get_normalized_crypto_by_date",
+                query = "select round(((max(c.price)-min(c.price))/min(c.price)),2) as price, " +
+                        "symbol from cryptocurrency c where cast(c.evaluated_at as date) = (:date) " +
+                        "group by symbol order by price desc;"
+        ),
 })
 public class CryptocurrencyEntity {
 

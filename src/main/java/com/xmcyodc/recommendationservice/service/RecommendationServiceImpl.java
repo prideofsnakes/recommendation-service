@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.Tuple;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         if (cryptocurrencyRepository.existsBySymbol(cryptocurrency.toUpperCase())) {
             Optional<Tuple> maybeTuple = cryptocurrencyRepository.getParticularCryptocurrency(cryptocurrency.toUpperCase())
                     .stream()
-                    .findAny();
+                    .findFirst();
             return maybeTuple.map(tuple -> ParticularCryptocurrency.builder()
                             .maxPrice(tuple.get(0, BigDecimal.class))
                             .minPrice(tuple.get(1, BigDecimal.class))
@@ -53,7 +54,13 @@ public class RecommendationServiceImpl implements RecommendationService {
     }
 
     @Override
-    public CryptocurrencyItem getNormalizedRangeCryptocurrencyByDay() {
-        return null;
+    public CryptocurrencyItem getNormalizedRangeCryptocurrencyByDate(LocalDate date) {
+        final Optional<Tuple> maybeTuple = cryptocurrencyRepository.getNormalizedRangeValuesByDate(date)
+                .stream()
+                .findFirst();
+        return maybeTuple.map(tuple -> CryptocurrencyItem.builder()
+                        .symbol(Cryptocurrency.valueOf(tuple.get(1, String.class)))
+                        .build())
+                .orElseThrow(() ->{throw new IllegalStateException("bobobobobooobob");});//TODO: correct
     }
 }
