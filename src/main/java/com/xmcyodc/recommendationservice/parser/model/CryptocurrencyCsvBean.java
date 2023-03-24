@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 @Data
 public class CryptocurrencyCsvBean extends CsvBean{
     @CsvBindByName
-    String symbol;
+    private String symbol;
 
     @CsvBindByName
-    BigDecimal price;
+    private BigDecimal price;
 
     @CsvBindByName
-    Long timestamp;
+    private Long timestamp;
 }
