@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +39,9 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Override
     public ParticularCryptocurrency getParticularCryptocurrency(String cryptocurrency) {
-        if (cryptocurrencyRepository.existsBySymbol(cryptocurrency.toUpperCase())) {
+        boolean cryptoExists = Stream.of(Cryptocurrency.values())
+                .anyMatch(value -> cryptocurrency.equalsIgnoreCase(value.name()));
+        if (cryptoExists) {
             Optional<Tuple> maybeTuple = cryptocurrencyRepository.getParticularCryptocurrency(cryptocurrency.toUpperCase())
                     .stream()
                     .findFirst();

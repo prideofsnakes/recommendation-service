@@ -1,6 +1,6 @@
 package com.xmcyodc.recommendationservice.parser;
 
-import com.xmcyodc.recommendationservice.model.csv.CryptocurrencyCsvBean;
+import com.xmcyodc.recommendationservice.parser.model.CryptocurrencyCsvBean;
 
 import java.util.List;
 

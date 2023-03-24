@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface CryptocurrencyRepository extends JpaRepository<CryptocurrencyEntity,Long> {
 
-    boolean existsBySymbol(String symbol);
     @Query(name = "get_normalized_crypto", nativeQuery = true)
     List<Tuple> getNormalizedRangeValues();
 

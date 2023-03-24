@@ -3,7 +3,7 @@ package com.xmcyodc.recommendationservice.parser;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.xmcyodc.recommendationservice.exception.CsvParserException;
-import com.xmcyodc.recommendationservice.model.csv.CryptocurrencyCsvBean;
+import com.xmcyodc.recommendationservice.parser.model.CryptocurrencyCsvBean;
 import org.springframework.stereotype.Component;
 
 import java.io.File;

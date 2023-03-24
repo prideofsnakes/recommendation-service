@@ -1,12 +1,12 @@
 package com.xmcyodc.recommendationservice.model;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Data
+@Value
 @Builder
 public class CryptocurrencyItem {
 
