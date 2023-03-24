@@ -3,6 +3,7 @@ package com.xmcyodc.recommendationservice;
 import com.xmcyodc.recommendationservice.entity.CryptocurrencyEntity;
 import com.xmcyodc.recommendationservice.parser.CsvSourceParser;
 import com.xmcyodc.recommendationservice.repository.CryptocurrencyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import java.time.Instant;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
+@Slf4j
 public class RecommendationServiceApplication implements CommandLineRunner {
 
     @Autowired
@@ -31,6 +33,7 @@ public class RecommendationServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        log.info("/----> Parsing CSV files from ../resources/static/csv has been started");
         repository.saveAll(parser.parseAll()
                 .stream()
                 .map(cryptocurrencyCsvBean -> {
@@ -41,5 +44,6 @@ public class RecommendationServiceApplication implements CommandLineRunner {
                     return entity;
                 })
                 .collect(Collectors.toList()));
+        log.info("/----> CSV files parsing has been successfully completed");
     }
 }
